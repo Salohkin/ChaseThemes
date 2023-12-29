@@ -2,40 +2,6 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.1": {
-      "BepInEx.Analyzers/1.0.8": {
-        "type": "package"
-      },
-      "BepInEx.BaseLib/5.4.20": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/BepInEx.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/BepInEx.dll": {}
-        }
-      },
-      "BepInEx.Core/5.4.21": {
-        "type": "package",
-        "dependencies": {
-          "BepInEx.BaseLib": "5.4.20",
-          "HarmonyX": "2.7.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/_._": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/_._": {}
-        },
-        "build": {
-          "build/BepInEx.Core.targets": {}
-        }
-      },
-      "BepInEx.PluginInfoProps/1.1.0": {
-        "type": "package",
-        "build": {
-          "build/BepInEx.PluginInfoProps.props": {}
-        }
-      },
       "HarmonyX/2.10.2": {
         "type": "package",
         "dependencies": {
@@ -625,61 +591,6 @@
     }
   },
   "libraries": {
-    "BepInEx.Analyzers/1.0.8": {
-      "sha512": "xrfNmunsPhBx+vStTxLonq/aHkRrDH77c9tG/x3m5eejrKe5B0nf7cJPRRt6x330sGI0bLaPTtygdeHUgvI3wQ==",
-      "type": "package",
-      "path": "bepinex.analyzers/1.0.8",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        "analyzers/dotnet/cs/BepInEx.Analyzers.CodeFixes.dll",
-        "analyzers/dotnet/cs/BepInEx.Analyzers.dll",
-        "bepinex.analyzers.1.0.8.nupkg.sha512",
-        "bepinex.analyzers.nuspec",
-        "tools/install.ps1",
-        "tools/uninstall.ps1"
-      ]
-    },
-    "BepInEx.BaseLib/5.4.20": {
-      "sha512": "0bXgYxbCEN2Ixp3kiFEhyw+RASeFQeg/ww+lbMt7if6XMeVS60eg6epNsMA8Jbx57dmNOzNevkKKw8mP8SUMqw==",
-      "type": "package",
-      "path": "bepinex.baselib/5.4.20",
-      "files": [
-        ".nupkg.metadata",
-        "bepinex.baselib.5.4.20.nupkg.sha512",
-        "bepinex.baselib.nuspec",
-        "images/icon.png",
-        "lib/net35/BepInEx.dll",
-        "lib/netstandard2.0/BepInEx.dll"
-      ]
-    },
-    "BepInEx.Core/5.4.21": {
-      "sha512": "NMUPlbHTTfJ+qIQCI90uIvjuUQ4wnwt4cpRsK3ItBh1DhsWFzAHXNiZjBxZkPysljEKQ2iu89sxMTga4bxBXVQ==",
-      "type": "package",
-      "path": "bepinex.core/5.4.21",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        "bepinex.core.5.4.21.nupkg.sha512",
-        "bepinex.core.nuspec",
-        "build/BepInEx.Core.targets",
-        "images/icon.png",
-        "lib/net35/_._",
-        "lib/netstandard2.0/_._",
-        "tools/Install.ps1"
-      ]
-    },
-    "BepInEx.PluginInfoProps/1.1.0": {
-      "sha512": "RqM3aaGs8Hc2m0D+8aSt9mv09rCMYNIF35NB3D6KA2zSpcXJh/9ZVWrPlIUJfA8KYzodSWcCMUexEW24fjwR3w==",
-      "type": "package",
-      "path": "bepinex.plugininfoprops/1.1.0",
-      "files": [
-        ".nupkg.metadata",
-        "bepinex.plugininfoprops.1.1.0.nupkg.sha512",
-        "bepinex.plugininfoprops.nuspec",
-        "build/BepInEx.PluginInfoProps.props"
-      ]
-    },
     "HarmonyX/2.10.2": {
       "sha512": "/5WwkxXX8mPsRuigQt957rJGx1f0dDQxk+bvk4yYITKFjXas9Em+O71zEP8X0ym8OFQQ2XH/2SxS4NC7vEC+Xg==",
       "type": "package",
@@ -2685,19 +2596,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bluem\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Programming\\LethalCompanyModding\\ChaseThemes\\ChaseThemes\\ChaseThemes.csproj",
+      "projectUniqueName": "E:\\Modding\\Projects\\ChaseThemes\\ChaseThemes\\ChaseThemes\\ChaseThemes.csproj",
       "projectName": "ChaseThemes",
-      "projectPath": "C:\\Programming\\LethalCompanyModding\\ChaseThemes\\ChaseThemes\\ChaseThemes.csproj",
-      "packagesPath": "C:\\Users\\bluem\\.nuget\\packages\\",
-      "outputPath": "C:\\Programming\\LethalCompanyModding\\ChaseThemes\\ChaseThemes\\obj\\",
+      "projectPath": "E:\\Modding\\Projects\\ChaseThemes\\ChaseThemes\\ChaseThemes\\ChaseThemes.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "E:\\Modding\\Projects\\ChaseThemes\\ChaseThemes\\ChaseThemes\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\bluem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2705,8 +2621,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.bepinex.dev/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.1": {
@@ -2763,8 +2678,37 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Unable to find package BepInEx.Core. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
+      "libraryId": "BepInEx.Core",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Unable to find package BepInEx.Analyzers. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
+      "libraryId": "BepInEx.Analyzers",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Unable to find package BepInEx.PluginInfoProps. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
+      "libraryId": "BepInEx.PluginInfoProps",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    }
+  ]
 }

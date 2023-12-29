@@ -5,14 +5,14 @@ using LCSoundTool;
 
 namespace ChaseThemes.Patches
 {
-    [HarmonyPatch(typeof(CrawlerAI))]
-    internal class CrawlerAIPatch : MonoBehaviour
+    [HarmonyPatch(typeof(HoarderBugAI))]
+    internal class HoardingBugAIPatch
     {
-        [HarmonyPatch("BeginChasingPlayerClientRpc")]
+        [HarmonyPatch("IsHoarderBugAngry")]
         [HarmonyPostfix]
-        static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref bool ___hasEnteredChaseMode, ref AudioSource ___creatureVoice)
+        static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice, ref bool ___inChase)
         {
-            if (___currentBehaviourStateIndex == 1 && !___hasEnteredChaseMode)
+            if (___currentBehaviourStateIndex == 2 && !___inChase)
             {
                 ___creatureVoice.PlayOneShot(StartOfRoundPatch.chosenMainClip);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
@@ -21,16 +21,17 @@ namespace ChaseThemes.Patches
     }
 
     [HarmonyPatch(typeof(EnemyAI))]
-    internal class CrawlerEnemyAIPatch : MonoBehaviour
+    internal class HoarderBugEnemyAIPatch : MonoBehaviour
     {
         [HarmonyPatch("SwitchToBehaviourStateOnLocalClient")]
         [HarmonyPostfix]
         static void StopchosenMainClip(int ___currentBehaviourStateIndex, ref EnemyType ___enemyType, ref AudioSource ___creatureVoice)
         {
             ChaseThemesBase.Instance.logger.LogInfo("Enemy name is: " + ___enemyType.enemyName);
-            if (___currentBehaviourStateIndex == 0 && ___enemyType.enemyName.ToLower() == "crawler")
+            if ((___currentBehaviourStateIndex == 0 || ___currentBehaviourStateIndex == 1) && ___enemyType.enemyName.ToLower() == "hoarding bug")
             {
-                ChaseThemesBase.Instance.logger.LogInfo("Crawler stopped");
+                ChaseThemesBase.Instance.logger.LogInfo("Hoarder bug stopped");
+                ChaseThemesBase.Instance.logger.LogInfo(___enemyType.enemyName.ToLower());
                 ___creatureVoice.Stop();
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme stopped!");
             }
