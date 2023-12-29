@@ -59,6 +59,7 @@ namespace ChaseThemes.Patches
         }
     }
 
+    /*
     [HarmonyPatch(typeof(EnemyAI))]
     internal class GhostGirlEnemyAIPatch : MonoBehaviour
     {
@@ -78,4 +79,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

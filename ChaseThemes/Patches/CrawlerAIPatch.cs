@@ -20,6 +20,7 @@ namespace ChaseThemes.Patches
         }
     }
 
+    /* Legacy Code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class CrawlerEnemyAIPatch : MonoBehaviour
     {
@@ -36,4 +37,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

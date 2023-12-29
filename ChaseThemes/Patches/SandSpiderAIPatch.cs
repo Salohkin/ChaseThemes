@@ -8,21 +8,29 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(SandSpiderAI))]
     internal class SandSpiderAIPatch
     {
-        static bool alreadyPlaying = false;
-        [HarmonyPatch("TriggerChaseWithPlayer")]
+        static bool audioPlaying = false;
+        static float playedTime = 0f;
+        [HarmonyPatch("Update")]
         [HarmonyPostfix]
-        static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice)
+        static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice, ref float ___chaseTimer, ref bool ___watchFromDistance)
         {
-            alreadyPlaying = false;
-            ChaseThemesBase.Instance.logger.LogInfo("CAHSE THEME: Test");
-            if (___currentBehaviourStateIndex == 2 && !alreadyPlaying)
+            if (___currentBehaviourStateIndex == 2 && ___chaseTimer > 0 && !audioPlaying && !___watchFromDistance)
             {
                 ___creatureVoice.PlayOneShot(StartOfRoundPatch.chosenMainClip);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
-                alreadyPlaying = true;
+                playedTime = 0f;
+                audioPlaying = true;
+            } else if (audioPlaying)
+            {
+                playedTime += Time.deltaTime;
+                if (playedTime > StartOfRoundPatch.chosenMainClip.length)
+                {
+                    audioPlaying = false;
+                }
             }
         }
     }
+    /* Legacy Code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class SpiderEnemyAIPatch : MonoBehaviour
     {
@@ -39,4 +47,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

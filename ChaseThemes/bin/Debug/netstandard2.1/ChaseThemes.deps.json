@@ -9,34 +9,16 @@
     ".NETStandard,Version=v2.1/": {
       "ChaseThemes/1.0.0": {
         "dependencies": {
-          "BepInEx.Analyzers": "1.0.8",
-          "BepInEx.Core": "5.4.21",
-          "BepInEx.PluginInfoProps": "1.1.0",
           "HarmonyX": "2.10.2",
           "UnityEngine.Modules": "2022.3.9",
           "Assembly-CSharp": "0.0.0.0",
+          "BepInEx": "5.4.22.0",
           "LC_SoundTool": "1.4.0.0"
         },
         "runtime": {
           "ChaseThemes.dll": {}
         }
       },
-      "BepInEx.Analyzers/1.0.8": {},
-      "BepInEx.BaseLib/5.4.20": {
-        "runtime": {
-          "lib/netstandard2.0/BepInEx.dll": {
-            "assemblyVersion": "5.4.20.0",
-            "fileVersion": "5.4.20.0"
-          }
-        }
-      },
-      "BepInEx.Core/5.4.21": {
-        "dependencies": {
-          "BepInEx.BaseLib": "5.4.20",
-          "HarmonyX": "2.10.2"
-        }
-      },
-      "BepInEx.PluginInfoProps/1.1.0": {},
       "HarmonyX/2.10.2": {
         "dependencies": {
           "MonoMod.RuntimeDetour": "22.3.23.4",
@@ -363,6 +345,14 @@
           }
         }
       },
+      "BepInEx/5.4.22.0": {
+        "runtime": {
+          "BepInEx.dll": {
+            "assemblyVersion": "5.4.22.0",
+            "fileVersion": "5.4.22.0"
+          }
+        }
+      },
       "LC_SoundTool/1.4.0.0": {
         "runtime": {
           "LC_SoundTool.dll": {
@@ -659,34 +649,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "BepInEx.Analyzers/1.0.8": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-xrfNmunsPhBx+vStTxLonq/aHkRrDH77c9tG/x3m5eejrKe5B0nf7cJPRRt6x330sGI0bLaPTtygdeHUgvI3wQ==",
-      "path": "bepinex.analyzers/1.0.8",
-      "hashPath": "bepinex.analyzers.1.0.8.nupkg.sha512"
-    },
-    "BepInEx.BaseLib/5.4.20": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-0bXgYxbCEN2Ixp3kiFEhyw+RASeFQeg/ww+lbMt7if6XMeVS60eg6epNsMA8Jbx57dmNOzNevkKKw8mP8SUMqw==",
-      "path": "bepinex.baselib/5.4.20",
-      "hashPath": "bepinex.baselib.5.4.20.nupkg.sha512"
-    },
-    "BepInEx.Core/5.4.21": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-NMUPlbHTTfJ+qIQCI90uIvjuUQ4wnwt4cpRsK3ItBh1DhsWFzAHXNiZjBxZkPysljEKQ2iu89sxMTga4bxBXVQ==",
-      "path": "bepinex.core/5.4.21",
-      "hashPath": "bepinex.core.5.4.21.nupkg.sha512"
-    },
-    "BepInEx.PluginInfoProps/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-RqM3aaGs8Hc2m0D+8aSt9mv09rCMYNIF35NB3D6KA2zSpcXJh/9ZVWrPlIUJfA8KYzodSWcCMUexEW24fjwR3w==",
-      "path": "bepinex.plugininfoprops/1.1.0",
-      "hashPath": "bepinex.plugininfoprops.1.1.0.nupkg.sha512"
-    },
     "HarmonyX/2.10.2": {
       "type": "package",
       "serviceable": true,
@@ -926,6 +888,11 @@
       "hashPath": "unityengine.modules.2022.3.9.nupkg.sha512"
     },
     "Assembly-CSharp/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BepInEx/5.4.22.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

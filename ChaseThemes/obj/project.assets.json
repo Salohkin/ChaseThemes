@@ -2588,9 +2588,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
-      "BepInEx.Analyzers >= 1.*",
-      "BepInEx.Core >= 5.*",
-      "BepInEx.PluginInfoProps >= 1.*",
       "HarmonyX >= 2.10.2",
       "UnityEngine.Modules >= 2022.3.9"
     ]
@@ -2639,19 +2636,6 @@
       "netstandard2.1": {
         "targetAlias": "netstandard2.1",
         "dependencies": {
-          "BepInEx.Analyzers": {
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "[1.*, )"
-          },
-          "BepInEx.Core": {
-            "target": "Package",
-            "version": "[5.*, )"
-          },
-          "BepInEx.PluginInfoProps": {
-            "target": "Package",
-            "version": "[1.*, )"
-          },
           "HarmonyX": {
             "target": "Package",
             "version": "[2.10.2, )"
@@ -2681,34 +2665,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1101",
-      "level": "Error",
-      "message": "Unable to find package BepInEx.Core. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
-      "libraryId": "BepInEx.Core",
-      "targetGraphs": [
-        ".NETStandard,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1101",
-      "level": "Error",
-      "message": "Unable to find package BepInEx.Analyzers. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
-      "libraryId": "BepInEx.Analyzers",
-      "targetGraphs": [
-        ".NETStandard,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1101",
-      "level": "Error",
-      "message": "Unable to find package BepInEx.PluginInfoProps. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
-      "libraryId": "BepInEx.PluginInfoProps",
-      "targetGraphs": [
-        ".NETStandard,Version=v2.1"
-      ]
-    }
-  ]
+  }
 }
