@@ -1,0 +1,1 @@
+Plays a theme whenever the local wildlife is chasing a player.
