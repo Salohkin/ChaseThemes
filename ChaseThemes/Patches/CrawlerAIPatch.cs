@@ -14,7 +14,7 @@ namespace ChaseThemes.Patches
         {
             if (___currentBehaviourStateIndex == 1 && !___hasEnteredChaseMode)
             {
-                ___creatureVoice.PlayOneShot(StartOfRoundPatch.chosenMainClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenMainClip);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
             }
         }

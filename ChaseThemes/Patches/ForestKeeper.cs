@@ -15,7 +15,7 @@ namespace ChaseThemes.Patches
             ChaseThemesBase.Instance.logger.LogInfo("methodTriggered ");
             if (___currentBehaviourStateIndex == 1 && !___chasingPlayerInLOS)
             {
-                ___creatureVoice.PlayOneShot(StartOfRoundPatch.chosenForestKeeperClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenForestKeeperClip);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
             }
         }

@@ -17,22 +17,18 @@ namespace ChaseThemes.Patches
         static void PlaychosenMainClip(ref AudioSource ___creatureVoice)
         {
             if (!audioPlaying) {
-                ___creatureVoice.PlayOneShot(StartOfRoundPatch.chosenGooClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenGooClip);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 audioPlaying = true;
                 playedTime = 0f;
-
             } else
             {
                 playedTime += Time.deltaTime;
-                if (playedTime > StartOfRoundPatch.chosenGooClip.length)
+                if (playedTime > RoundManagerPatch.chosenGooClip.length)
                 {
                     audioPlaying = false;
                 }
             }
-            
         }
-
-
     }
 }

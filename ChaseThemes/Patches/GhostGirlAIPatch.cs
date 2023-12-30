@@ -6,8 +6,6 @@ using System.CodeDom.Compiler;
 
 namespace ChaseThemes.Patches
 {
-    
-
     [HarmonyPatch(typeof(DressGirlAI))]
     internal class GhostGirlAIPatch : MonoBehaviour
     {
@@ -28,7 +26,7 @@ namespace ChaseThemes.Patches
         {
             alreadyPlaying = false;
             temp = ___creatureVoice;
-            temp.clip = StartOfRoundPatch.chosenGhostGirlClip;
+            temp.clip = RoundManagerPatch.chosenGhostGirlClip;
             temp.loop = true;
             if (posInSong > temp.clip.length)
             {

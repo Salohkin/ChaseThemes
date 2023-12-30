@@ -22,17 +22,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="0Harmony">
-        <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\BepInEx\core\0Harmony.dll</HintPath>
-      </Reference>
       <Reference Include="Assembly-CSharp">
-        <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
-      </Reference>
-      <Reference Include="BepInEx">
-        <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\BepInEx\core\BepInEx.dll</HintPath>
+        <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company (ModTesting)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
       </Reference>
       <Reference Include="LC_SoundTool">
-        <HintPath>C:\Users\User\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\Default\BepInEx\plugins\no00ob-LCSoundTool\LC_SoundTool.dll</HintPath>
+        <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company (ModTesting)\BepInEx\plugins\no00ob-LCSoundTool-1.4.0\LC_SoundTool.dll</HintPath>
       </Reference>
     </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@ namespace ChaseThemes.Patches
         {
             if (!audioPlaying)
             {
-                ___longRangeAudio.PlayOneShot(StartOfRoundPatch.chosenNutcrackerClip);
+                ___longRangeAudio.PlayOneShot(RoundManagerPatch.chosenNutcrackerClip);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 audioPlaying = true;
                 playedTime = 0f;
@@ -34,7 +34,7 @@ namespace ChaseThemes.Patches
             else
             {
                 playedTime += Time.deltaTime;
-                if (playedTime > StartOfRoundPatch.chosenNutcrackerClip.length)
+                if (playedTime > RoundManagerPatch.chosenNutcrackerClip.length)
                 {
                     audioPlaying = false;
                 }

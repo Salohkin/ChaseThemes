@@ -44,7 +44,8 @@ namespace ChaseThemes
 
 
             harmony.PatchAll(typeof(ChaseThemesBase));
-            harmony.PatchAll(typeof(StartOfRoundPatch));
+            harmony.PatchAll(typeof(RoundManagerPatch));
+            harmony.PatchAll(typeof(RoundManagerPatch));
 
             harmony.PatchAll(typeof(CrawlerAIPatch));
             harmony.PatchAll(typeof(SandSpiderAIPatch));
