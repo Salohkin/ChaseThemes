@@ -20,6 +20,7 @@ namespace ChaseThemes.Patches
         }
     }
 
+    /* Legacy code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class HoarderBugEnemyAIPatch : MonoBehaviour
     {
@@ -37,4 +38,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

@@ -21,6 +21,7 @@ namespace ChaseThemes.Patches
         }
     }
 
+    /* Legacy code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class ForestKeeperEnemyAIPatch : MonoBehaviour
     {
@@ -37,4 +38,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

@@ -23,6 +23,8 @@ namespace ChaseThemes.Patches
             }
         }
     }
+
+    /* Legacy code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class CircuitBeeEnemyAIPatch : MonoBehaviour
     {
@@ -38,4 +40,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

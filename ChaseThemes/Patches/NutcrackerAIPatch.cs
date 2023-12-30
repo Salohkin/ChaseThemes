@@ -39,7 +39,16 @@ namespace ChaseThemes.Patches
                     audioPlaying = false;
                 }
             }
+        }
 
+        [HarmonyPatch("StopInspection")]
+        [HarmonyPostfix]
+        static void stopClip(ref AudioSource ___longRangeAudio, ref bool ___isEnemyDead)
+        {
+            if (___isEnemyDead)
+            {
+                ___longRangeAudio.Stop();
+            }
         }
     }
 }

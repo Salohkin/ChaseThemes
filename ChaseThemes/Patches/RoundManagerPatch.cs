@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace ChaseThemes.Patches
 {
