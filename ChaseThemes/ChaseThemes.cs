@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using BepInEx.Configuration;
 using HarmonyLib;
 using ChaseThemes.Patches;
 using UnityEngine;
@@ -7,6 +8,8 @@ using System.IO;
 using LCSoundTool;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Threading.Tasks;
 
 namespace ChaseThemes
 {
@@ -22,15 +25,14 @@ namespace ChaseThemes
 
         internal ManualLogSource logger;
 
+        public static List<string> configSections;
+
         public static AudioClip[] defaultAudioClips;
-
         public static AudioClip[] forestKeeperAudioClips;
-
         public static AudioClip[] ghostGirlAudioClips;
-
-        public static AudioClip[] gooAudioClips;
-
+        public static AudioClip[] blobAudioClips;
         public static AudioClip[] nutcrackerAudioClips;
+
 
         private void Awake()
         {
@@ -40,8 +42,8 @@ namespace ChaseThemes
             }
 
             logger = BepInEx.Logging.Logger.CreateLogSource(pluginGUID);
-            logger.LogInfo($"CHASE THEMES: Plugin {pluginGUID} is loaded!");
 
+            //GenerateConfig();
 
             harmony.PatchAll(typeof(ChaseThemesBase));
             harmony.PatchAll(typeof(RoundManagerPatch));
@@ -51,38 +53,90 @@ namespace ChaseThemes
             harmony.PatchAll(typeof(HoardingBugAIPatch));
             harmony.PatchAll(typeof(GhostGirlAIPatch));
             harmony.PatchAll(typeof(ForestKeeperAIPatch));
-            harmony.PatchAll(typeof(GooAIPatch));
+            harmony.PatchAll(typeof(BlobAIPatch));
             harmony.PatchAll(typeof(NutcrackerAIPatch));
             //harmony.PatchAll(typeof(CircuitBeeAIPatch));
 
             harmony.PatchAll(typeof(EnemyAIPatch));
 
             LoadAudioFiles();
+
+            //AwakeAsync();
+
+            logger.LogInfo($"CHASE THEMES: Plugin {pluginGUID} is loaded!");
+        }
+        /*
+        private async Task AwakeAsync()
+        {
+            //await Task.Run(() => LoadAudioFiles());
+            await LoadAudioFiles();
         }
 
+        private void GenerateConfig()
+        {
+            configSections = new List<string> { "MAIN", "THUMPER", "BUNKER SPIDER", "HOARDING BUG", "FORESTKEEPER", "GHOSTGIRL", "BLOB", "NUTCRACKER" };
+        }
+        */
+
+        private void AddEntryToConfig(string category, int count, string name)
+        {
+            //TODO: * Add string cleaning to make legal strings in the config. No " ' ] [ allowed (not sure about other characters - have to test it)
+            //      * Make sure existing config entries aren't overwritten
+            try
+            {
+                /*
+                name.Replace("\"", "");
+                name.Replace("\'", "");
+                name.Replace("]", ")");
+                name.Replace("[", "(");
+
+                if (!Config.ContainsKey(new ConfigDefinition(category, name)))
+                { 
+                    logger.LogDebug("[" + category + "|" + name + "] does not already exist in the config... adding it now"); */
+                    if (count > 0)
+                    {
+                        Config.Bind(category, name, true);
+                    }
+                    else
+                    {
+                        Config.Bind(new ConfigDefinition(category, name), true);
+                    } /*
+                }
+                else
+                {
+                    logger.LogDebug("[" + category + "|" + name + "] already exists in the config");
+                } */
+            }
+            catch(Exception e)
+            {
+                logger.LogError(e);
+            }
+        }
+        
         private void LoadAudioFiles()
         {
-            logger.LogInfo($"Retrieving songs...");
+            logger.LogInfo($"Retrieving themes...");
             string path = Path.Combine(Paths.PluginPath, "LineLoad-ChaseThemes");
             string[] songPaths = Directory.GetFiles(path, "*.ogg");
             int numLoaded = 0;
             int defaultAmount = 0;
             int forestAmount = 0;
             int girlAmount = 0;
-            int gooAmount = 0;
+            int blobAmount = 0;
             int nutcrackerAmount = 0;
 
+            Array.Sort(songPaths);
 
             if (songPaths.Length != 0)
             {
-                logger.LogInfo($"CHASE THEMES: Retrieved Songs Successfully. Number of songs Retrieved: " + songPaths.Length);
+                logger.LogInfo($"CHASE THEMES: Retrieved themes Successfully. Number of themes Retrieved: " + songPaths.Length);
             }
             else
             {
-                logger.LogWarning($"CHASE THEMES: No Songs Found! ");
+                logger.LogWarning($"CHASE THEMES: No themes found! ");
             }
 
-            logger.LogInfo($"CHASE THEMES: Loading Songs...");
+            logger.LogInfo($"CHASE THEMES: Loading themes...");
 
             for (int loadNum = 0; loadNum < songPaths.Length; loadNum++)
             {
@@ -90,38 +144,43 @@ namespace ChaseThemes
 
                 if (songPaths[loadNum].Contains("MAIN"))
                 {
+                    AddEntryToConfig("MAIN", nutcrackerAmount, songPaths[loadNum].Replace(path + "\\", ""));
                     defaultAmount++;
-                    logger.LogInfo($"CHASE THEMES: Detected Main Song: " + songPaths[loadNum].Replace(path, ""));
+                    logger.LogInfo($"CHASE THEMES: Detected MAIN theme: " + songPaths[loadNum].Replace(path, ""));
                 }
                 if (songPaths[loadNum].Contains("FORESTKEEPER"))
                 {
+                    AddEntryToConfig("FORESTKEEPER", nutcrackerAmount, songPaths[loadNum].Replace(path + "\\", ""));
                     forestAmount++;
-                    logger.LogInfo($"CHASE THEMES: Detected Forest Keeper Song: " + songPaths[loadNum].Replace(path, ""));
+                    logger.LogInfo($"CHASE THEMES: Detected FORESTKEEPER theme: " + songPaths[loadNum].Replace(path, ""));
                 }
                 if (songPaths[loadNum].Contains("GHOSTGIRL"))
                 {
+                    AddEntryToConfig("GHOSTGIRL", nutcrackerAmount, songPaths[loadNum].Replace(path + "\\", ""));
                     girlAmount++;
-                    logger.LogInfo($"CHASE THEMES: Detected Ghost Girl Song: " + songPaths[loadNum].Replace(path, ""));
+                    logger.LogInfo($"CHASE THEMES: Detected GHOSTGIRL Theme: " + songPaths[loadNum].Replace(path, ""));
                 }
-                if (songPaths[loadNum].Contains("GOO"))
+                if (songPaths[loadNum].Contains("BLOB"))
                 {
-                    gooAmount++;
-                    logger.LogInfo($"CHASE THEMES: Detected Goo Song: " + songPaths[loadNum].Replace(path, ""));
+                    AddEntryToConfig("BLOB", nutcrackerAmount, songPaths[loadNum].Replace(path + "\\", ""));
+                    blobAmount++;
+                    logger.LogInfo($"CHASE THEMES: Detected BLOB Theme: " + songPaths[loadNum].Replace(path, ""));
                 }
                 if (songPaths[loadNum].Contains("NUTCRACKER"))
                 {
+                    AddEntryToConfig("NUTCRACKER", nutcrackerAmount, songPaths[loadNum].Replace(path + "\\", ""));
                     nutcrackerAmount++;
-                    logger.LogInfo($"CHASE THEMES: Detected Nutcracker Song: " + songPaths[loadNum].Replace(path, ""));
+                    logger.LogInfo($"CHASE THEMES: Detected NUTCRACKER Theme: " + songPaths[loadNum].Replace(path, ""));
                 }
             }
 
-            logger.LogInfo("CHASE THEMES: Number of songs in main:" + defaultAmount);
-            logger.LogInfo("CHASE THEMES: Number of songs in Ghost Girl:" + girlAmount);
+            logger.LogInfo("CHASE THEMES: Number of themes in MAIN:" + defaultAmount);
+            logger.LogInfo("CHASE THEMES: Number of themes in GHOSTGIRL:" + girlAmount);
 
             defaultAudioClips = new AudioClip[defaultAmount];
             forestKeeperAudioClips = new AudioClip[forestAmount];
             ghostGirlAudioClips = new AudioClip[girlAmount];
-            gooAudioClips = new AudioClip[gooAmount];
+            blobAudioClips = new AudioClip[blobAmount];
             nutcrackerAudioClips = new AudioClip[nutcrackerAmount];
 
             foreach (string songPath in songPaths)
@@ -133,58 +192,58 @@ namespace ChaseThemes
 
                 if (songPath.Contains("MAIN"))
                 {
-                    defaultAudioClips[defaultAmount - 1] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
-                    logger.LogInfo($"CHASE THEMES: Loaded Main Song: " + songPath.Replace(path, ""));
                     defaultAmount--;
+                    defaultAudioClips[defaultAmount] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
+                    logger.LogInfo($"CHASE THEMES: Loaded MAIN theme: " + songPath.Replace(path, ""));
                     added = true;
                 }
                 if (songPath.Contains("FORESTKEEPER"))
                 {
-                    forestKeeperAudioClips[forestAmount - 1] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
-                    logger.LogInfo($"CHASE THEMES: Loaded Forest Keeper Song: " + songPath.Replace(path, ""));
                     forestAmount--;
+                    forestKeeperAudioClips[forestAmount] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
+                    logger.LogInfo($"CHASE THEMES: Loaded FORESTKEEPER theme: " + songPath.Replace(path, ""));
                     added = true;
                 }
                 if (songPath.Contains("GHOSTGIRL"))
                 {
-                    ghostGirlAudioClips[girlAmount - 1] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
-                    logger.LogInfo($"CHASE THEMES: Loaded Ghost Girl Song: " + songPath.Replace(path, ""));
                     girlAmount--;
+                    ghostGirlAudioClips[girlAmount] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
+                    logger.LogInfo($"CHASE THEMES: Loaded GHOSTGIRL theme: " + songPath.Replace(path, ""));
                     added = true;
                 }
-                if (songPath.Contains("GOO"))
+                if (songPath.Contains("BLOB"))
                 {
-                    gooAudioClips[gooAmount - 1] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
-                    logger.LogInfo($"CHASE THEMES: Loaded Goo Song: " + songPath.Replace(path, ""));
-                    gooAmount--;
+                    blobAmount--;
+                    blobAudioClips[blobAmount] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
+                    logger.LogInfo($"CHASE THEMES: Loaded BLOB theme: " + songPath.Replace(path, ""));
                     added = true;
                 }
                 if (songPath.Contains("NUTCRACKER"))
                 {
-                    nutcrackerAudioClips[nutcrackerAmount - 1] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
-                    logger.LogInfo($"CHASE THEMES: Loaded Nutcracker Song: " + songPath.Replace(path, ""));
                     nutcrackerAmount--;
+                    nutcrackerAudioClips[nutcrackerAmount] = SoundTool.GetAudioClip(Paths.PluginPath, songPath);
+                    logger.LogInfo($"CHASE THEMES: Loaded NUTCRACKER theme: " + songPath.Replace(path, ""));
                     added = true;
                 }
                 if (!added)
                 {
                     numLoaded--;
-                    logger.LogWarning($"Song failed to load: " + songPath.Replace(path, ""));
+                    logger.LogWarning($"Theme failed to load: " + songPath.Replace(path, ""));
                 }
             }
 
 
             if (numLoaded == songPaths.Length)
             {
-                logger.LogInfo($"CHASE THEMES: All Songs Loaded Successfully!");
+                logger.LogInfo($"CHASE THEMES: All themes loaded successfully!");
             }
             else if (numLoaded > 0)
             {
-                logger.LogWarning($"CHASE THEMES: Some songs failed to load successfully!");
+                logger.LogWarning($"CHASE THEMES: Some themes failed to load successfully!");
             }
             else
             {
-                logger.LogWarning($"Failed to load songs!");
+                logger.LogWarning($"Failed to load themes!");
             }
         }
     }

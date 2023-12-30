@@ -7,7 +7,7 @@ using Microsoft.Win32;
 namespace ChaseThemes.Patches
 {
     [HarmonyPatch(typeof(BlobAI))]
-    internal class GooAIPatch : MonoBehaviour
+    internal class BlobAIPatch : MonoBehaviour
     {
         static bool audioPlaying = false;
         static float playedTime = 0f;
@@ -17,14 +17,14 @@ namespace ChaseThemes.Patches
         static void PlaychosenMainClip(ref AudioSource ___creatureVoice)
         {
             if (!audioPlaying) {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenGooClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenBlobClip);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 audioPlaying = true;
                 playedTime = 0f;
             } else
             {
                 playedTime += Time.deltaTime;
-                if (playedTime > RoundManagerPatch.chosenGooClip.length)
+                if (playedTime > RoundManagerPatch.chosenBlobClip.length)
                 {
                     audioPlaying = false;
                 }

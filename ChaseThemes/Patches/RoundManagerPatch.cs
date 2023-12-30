@@ -17,7 +17,7 @@ namespace ChaseThemes.Patches
 
         public static AudioClip chosenForestKeeperClip;
 
-        public static AudioClip chosenGooClip;
+        public static AudioClip chosenBlobClip;
 
         public static AudioClip chosenNutcrackerClip;
 
@@ -66,10 +66,10 @@ namespace ChaseThemes.Patches
                 chosenGhostGirlClip = ChaseThemesBase.ghostGirlAudioClips[clipNumber];
                 ChaseThemesBase.Instance.logger.LogInfo("CHASE THEMES: Ghost Girl Clip successfully chosen: " + chosenGhostGirlClip.ToString());
 
-                numOfClips = ChaseThemesBase.gooAudioClips.Count();
+                numOfClips = ChaseThemesBase.blobAudioClips.Count();
                 clipNumber = seed % numOfClips; //Random.Range(0, numOfClips - 1);
-                chosenGooClip = ChaseThemesBase.gooAudioClips[clipNumber];
-                ChaseThemesBase.Instance.logger.LogInfo("CHASE THEMES: Goo Clip successfully chosen: " + chosenGooClip.ToString());
+                chosenBlobClip = ChaseThemesBase.blobAudioClips[clipNumber];
+                ChaseThemesBase.Instance.logger.LogInfo("CHASE THEMES: Goo Clip successfully chosen: " + chosenBlobClip.ToString());
 
                 numOfClips = ChaseThemesBase.nutcrackerAudioClips.Count();
                 clipNumber = seed % numOfClips; //Random.Range(0, numOfClips - 1);

@@ -10,7 +10,7 @@ namespace ChaseThemes.Patches
     internal class EnemyAIPatch : MonoBehaviour
     {
         [HarmonyPatch("KillEnemyClientRpc")]
-        [HarmonyPrefix] // prefix so the creature isn't already destroyed when this runs (postfix might work, but haven't tested it)
+        [HarmonyPostfix]
         static void StopThemeOnDeath(EnemyAI __instance)
         {
             StopTheme(__instance);
