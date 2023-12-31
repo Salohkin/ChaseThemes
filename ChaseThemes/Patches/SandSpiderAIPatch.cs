@@ -8,22 +8,33 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(SandSpiderAI))]
     internal class SandSpiderAIPatch
     {
-        public static bool alreadyPlaying = false;
+        static string audioCategory = "MAIN";
+        static bool audioPlaying = false;
+        static float playedTime = 0f;
 
-        [HarmonyPatch("TriggerChaseWithPlayer")]
+        [HarmonyPatch("Update")]
         [HarmonyPostfix]
-        static void PlayChosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice)
+        static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice, ref float ___chaseTimer, ref bool ___watchFromDistance)
         {
-            ChaseThemesBase.Instance.logger.LogInfo("CHASE THEME: Test");
-            if (___currentBehaviourStateIndex == 2 && !alreadyPlaying)
+            if (___currentBehaviourStateIndex == 2 && ___chaseTimer > 0 && !audioPlaying && !___watchFromDistance)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenMainClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
-                alreadyPlaying = true;
+                playedTime = 0f;
+                audioPlaying = true;
+            }
+            else if (audioPlaying)
+            {
+                playedTime += Time.deltaTime;
+                if (playedTime > RoundManagerPatch.chosenThemes[audioCategory].length)
+                {
+                    audioPlaying = false;
+                }
             }
         }
     }
 
+    /* Legacy Code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class SpiderEnemyAIPatch : MonoBehaviour
     {
@@ -41,4 +52,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

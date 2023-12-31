@@ -8,6 +8,7 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(RedLocustBees))]
     internal class CircuitBeeAIPatch
     {
+        static string audioCategory = "MAIN";
         static bool alreadyPlaying = false;
 
         [HarmonyPatch("Update")]
@@ -17,12 +18,14 @@ namespace ChaseThemes.Patches
             alreadyPlaying = false;
             if (___currentBehaviourStateIndex == 2 && !alreadyPlaying)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenMainClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 alreadyPlaying = true;
             }
         }
     }
+
+    /* Legacy code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class CircuitBeeEnemyAIPatch : MonoBehaviour
     {
@@ -38,4 +41,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

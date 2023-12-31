@@ -8,18 +8,21 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(HoarderBugAI))]
     internal class HoardingBugAIPatch
     {
+        static string audioCategory = "MAIN";
+
         [HarmonyPatch("IsHoarderBugAngry")]
         [HarmonyPostfix]
         static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice, ref bool ___inChase)
         {
             if (___currentBehaviourStateIndex == 2 && !___inChase)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenMainClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
             }
         }
     }
 
+    /* Legacy code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class HoarderBugEnemyAIPatch : MonoBehaviour
     {
@@ -37,4 +40,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }

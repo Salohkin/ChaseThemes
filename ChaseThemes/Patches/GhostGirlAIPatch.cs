@@ -9,8 +9,9 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(DressGirlAI))]
     internal class GhostGirlAIPatch : MonoBehaviour
     {
+        static string audioCategory = "GHOSTGIRL";
         static bool alreadyPlaying = false;
-        public static AudioSource temp = new AudioSource();
+        public static AudioSource GirlThemeSource = new AudioSource();
         
         public static float posInSong = 0f;
         [HarmonyPatch("Start")]
@@ -25,12 +26,12 @@ namespace ChaseThemes.Patches
         static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice, ref float ___chaseTimer)
         {
             alreadyPlaying = false;
-            temp = ___creatureVoice;
-            temp.clip = RoundManagerPatch.chosenGhostGirlClip;
-            temp.loop = true;
-            if (posInSong > temp.clip.length)
+            GirlThemeSource = ___creatureVoice;
+            GirlThemeSource.clip = RoundManagerPatch.chosenThemes[audioCategory];
+            GirlThemeSource.loop = true;
+            if (posInSong > GirlThemeSource.clip.length)
             {
-                posInSong -= temp.clip.length;
+                posInSong -= GirlThemeSource.clip.length;
             }
 
             ChaseThemesBase.Instance.logger.LogInfo("Song will start playing " + posInSong + " seconds in...");
@@ -40,9 +41,9 @@ namespace ChaseThemes.Patches
             {
                 ChaseThemesBase.Instance.logger.LogInfo("Should be starting " + posInSong + " into the song");
            
-                temp.Play();
-                temp.time = posInSong;
-                ChaseThemesBase.Instance.logger.LogInfo("Starting " + temp.time + " into the song");
+                GirlThemeSource.Play();
+                GirlThemeSource.time = posInSong;
+                ChaseThemesBase.Instance.logger.LogInfo("Starting " + GirlThemeSource.time + " into the song");
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 alreadyPlaying = true;
                 
@@ -57,6 +58,7 @@ namespace ChaseThemes.Patches
         }
     }
 
+    /* Legacy code
     [HarmonyPatch(typeof(EnemyAI))]
     internal class GhostGirlEnemyAIPatch : MonoBehaviour
     {
@@ -76,4 +78,5 @@ namespace ChaseThemes.Patches
             }
         }
     }
+    */
 }
