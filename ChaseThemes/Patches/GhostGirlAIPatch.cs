@@ -9,6 +9,7 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(DressGirlAI))]
     internal class GhostGirlAIPatch : MonoBehaviour
     {
+        static string audioCategory = "GHOSTGIRL";
         static bool alreadyPlaying = false;
         public static AudioSource GirlThemeSource = new AudioSource();
         
@@ -26,7 +27,7 @@ namespace ChaseThemes.Patches
         {
             alreadyPlaying = false;
             GirlThemeSource = ___creatureVoice;
-            GirlThemeSource.clip = RoundManagerPatch.chosenGhostGirlClip;
+            GirlThemeSource.clip = RoundManagerPatch.chosenThemes[audioCategory];
             GirlThemeSource.loop = true;
             if (posInSong > GirlThemeSource.clip.length)
             {

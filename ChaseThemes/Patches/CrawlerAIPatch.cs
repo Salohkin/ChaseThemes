@@ -8,13 +8,15 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(CrawlerAI))]
     internal class CrawlerAIPatch : MonoBehaviour
     {
+        static string audioCategory = "MAIN";
+
         [HarmonyPatch("BeginChasingPlayerClientRpc")]
         [HarmonyPostfix]
         static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref bool ___hasEnteredChaseMode, ref AudioSource ___creatureVoice)
         {
             if (___currentBehaviourStateIndex == 1 && !___hasEnteredChaseMode)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenMainClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
             }
         }

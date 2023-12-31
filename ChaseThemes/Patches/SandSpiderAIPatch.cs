@@ -8,15 +8,17 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(SandSpiderAI))]
     internal class SandSpiderAIPatch
     {
+        static string audioCategory = "MAIN";
         static bool audioPlaying = false;
         static float playedTime = 0f;
+
         [HarmonyPatch("Update")]
         [HarmonyPostfix]
         static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref AudioSource ___creatureVoice, ref float ___chaseTimer, ref bool ___watchFromDistance)
         {
             if (___currentBehaviourStateIndex == 2 && ___chaseTimer > 0 && !audioPlaying && !___watchFromDistance)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenMainClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 playedTime = 0f;
                 audioPlaying = true;
@@ -24,7 +26,7 @@ namespace ChaseThemes.Patches
             else if (audioPlaying)
             {
                 playedTime += Time.deltaTime;
-                if (playedTime > RoundManagerPatch.chosenMainClip.length)
+                if (playedTime > RoundManagerPatch.chosenThemes[audioCategory].length)
                 {
                     audioPlaying = false;
                 }

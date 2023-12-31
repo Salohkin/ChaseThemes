@@ -8,6 +8,8 @@ namespace ChaseThemes.Patches
     [HarmonyPatch(typeof(ForestGiantAI))]
     internal class ForestKeeperAIPatch : MonoBehaviour
     {
+        static string audioCategory = "FORESTKEEPER";
+
         [HarmonyPatch("BeginChasingNewPlayerClientRpc")]
         [HarmonyPostfix]
         static void PlaychosenMainClip(ref int ___currentBehaviourStateIndex, ref bool ___chasingPlayerInLOS, ref AudioSource ___creatureVoice)
@@ -15,7 +17,7 @@ namespace ChaseThemes.Patches
             ChaseThemesBase.Instance.logger.LogInfo("methodTriggered ");
             if (___currentBehaviourStateIndex == 1 && !___chasingPlayerInLOS)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenForestKeeperClip);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
             }
         }
