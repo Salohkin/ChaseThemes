@@ -1,6 +1,6 @@
 {
     "name": "ChaseThemes",
-    "version_number": "1.0.1",
+    "version_number": "1.0.0",
     "website_url": "https://github.com/Salohkin/ChaseThemes",
     "description": "Plays a theme whenever the local wildlife is chasing a player.",
     "dependencies": [

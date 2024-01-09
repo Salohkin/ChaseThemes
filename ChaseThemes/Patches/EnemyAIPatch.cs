@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-using BepInEx;
-using HarmonyLib;
-using LCSoundTool;
+﻿using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
 namespace ChaseThemes.Patches
 {
@@ -9,7 +10,7 @@ namespace ChaseThemes.Patches
     internal class EnemyAIPatch : MonoBehaviour
     {
         [HarmonyPatch("KillEnemyClientRpc")]
-        [HarmonyPrefix] // prefix so the creature isn't already destroyed when this runs (postfix might work, but haven't tested it)
+        [HarmonyPostfix]
         static void StopThemeOnDeath(EnemyAI __instance)
         {
             StopTheme(__instance);
@@ -22,12 +23,14 @@ namespace ChaseThemes.Patches
             if (__instance.currentBehaviourStateIndex == 0 && (isEnemy(__instance, "crawler") || isEnemy(__instance, "forestgiant")))
             {
                 StopTheme(__instance);
-            } else if (__instance.currentBehaviourStateIndex != 2 && (isEnemy(__instance, "hoarding bug") || isEnemy(__instance, "sandspider")))
+            }
+            else if (__instance.currentBehaviourStateIndex != 2 && (isEnemy(__instance, "hoarding bug") || isEnemy(__instance, "sandspider")))
             {
                 StopTheme(__instance);
-            } else if (__instance.currentBehaviourStateIndex == 0 && isEnemy(__instance, "girl"))
+            }
+            else if (__instance.currentBehaviourStateIndex == 0 && isEnemy(__instance, "girl"))
             {
-                GhostGirlAIPatch.temp.Stop();
+                GhostGirlAIPatch.GirlThemeSource.Stop();
             }
         }
 
