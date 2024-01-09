@@ -11,6 +11,7 @@ namespace ChaseThemes.Patches
         static string audioCategory = "NUTCRACKER";
         static bool audioPlaying = false;
         static float playedTime = 0f;
+        static float volume = 0.7f;
 
         [HarmonyPatch("Start")]
         [HarmonyPostfix]
@@ -26,7 +27,7 @@ namespace ChaseThemes.Patches
         {
             if (!audioPlaying)
             {
-                ___longRangeAudio.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
+                ___longRangeAudio.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory], volume);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 audioPlaying = true;
                 playedTime = 0f;

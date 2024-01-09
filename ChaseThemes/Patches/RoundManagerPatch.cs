@@ -42,14 +42,14 @@ namespace ChaseThemes.Patches
 
             chosenThemes.Clear();
 
-            foreach (string currentCategory in ChaseThemesBase.audioCategories)
+            foreach (string currentCategory in ChaseThemesBase.themeCategories)
             {
                 numOfClips = ChaseThemesBase.themeAudioClips[currentCategory].Length;
                 clipNumber = seed % numOfClips;
                 chosenThemes.TryAdd(currentCategory, ChaseThemesBase.themeAudioClips[currentCategory][clipNumber]);
 
                 ChaseThemesBase.Instance.logger.LogDebug("CHASE THEMES: Number of clips: " + numOfClips + " Chosen clip number " + clipNumber);
-                ChaseThemesBase.Instance.logger.LogInfo("CHASE THEMES: Main Clip successfully chosen: " + chosenThemes[currentCategory].ToString());
+                ChaseThemesBase.Instance.logger.LogInfo("CHASE THEMES: " + currentCategory + " clip successfully chosen: " + chosenThemes[currentCategory].ToString());
             }
         }
     }

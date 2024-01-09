@@ -11,13 +11,16 @@ namespace ChaseThemes.Patches
     {
         static string audioCategory = "GHOSTGIRL";
         static bool alreadyPlaying = false;
+        static float volume = 1.15f;
+
         public static AudioSource GirlThemeSource = new AudioSource();
-        
         public static float posInSong = 0f;
+
         [HarmonyPatch("Start")]
         [HarmonyPostfix]
         static void resetGirl()
         {
+            GirlThemeSource.volume = volume;
             posInSong = 0f;
         }
 
@@ -46,7 +49,6 @@ namespace ChaseThemes.Patches
                 ChaseThemesBase.Instance.logger.LogInfo("Starting " + GirlThemeSource.time + " into the song");
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 alreadyPlaying = true;
-                
             } 
         }
 

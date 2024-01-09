@@ -11,6 +11,7 @@ namespace ChaseThemes.Patches
         static string audioCategory = "MAIN";
         static bool audioPlaying = false;
         static float playedTime = 0f;
+        static float volume = 0.8f;
 
         [HarmonyPatch("Update")]
         [HarmonyPostfix]
@@ -18,7 +19,7 @@ namespace ChaseThemes.Patches
         {
             if (___currentBehaviourStateIndex == 2 && ___chaseTimer > 0 && !audioPlaying && !___watchFromDistance)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory], volume);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
                 playedTime = 0f;
                 audioPlaying = true;

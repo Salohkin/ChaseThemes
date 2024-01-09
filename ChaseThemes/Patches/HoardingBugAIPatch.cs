@@ -9,6 +9,7 @@ namespace ChaseThemes.Patches
     internal class HoardingBugAIPatch
     {
         static string audioCategory = "MAIN";
+        static float volume = 0.95f;
 
         [HarmonyPatch("IsHoarderBugAngry")]
         [HarmonyPostfix]
@@ -16,7 +17,7 @@ namespace ChaseThemes.Patches
         {
             if (___currentBehaviourStateIndex == 2 && !___inChase)
             {
-                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory]);
+                ___creatureVoice.PlayOneShot(RoundManagerPatch.chosenThemes[audioCategory], volume);
                 ChaseThemesBase.Instance.logger.LogInfo("Chase theme started!");
             }
         }
